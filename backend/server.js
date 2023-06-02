@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/login', (req, res) => {
+app.locals.globalVariable = {};
+
+app.post('/login', async (req, res) => {
     let dbOptions = {
         host: "localhost",
         user: "root",
@@ -21,9 +23,9 @@ app.post('/login', (req, res) => {
         password: req.body.password,
         database: req.body.database
     }
-    // console.log('HEYY');
-    console.log(req.body);
-    // console.log(dbOptions);
+    //console.log('HEYY');
+    //console.log(req.body);
+    //console.log(dbOptions);
 
     var connection = mysql.createConnection(req.body.config);
     console.log("Connecting to database... ");
@@ -34,6 +36,8 @@ app.post('/login', (req, res) => {
                 access: true,
                 msg: "Successfuly logged into Database!"
             })
+            app.locals.globalVariable = connection;
+            // console.log(JSON.stringify(connection));
         }else{
             console.log("Credentials incorrect. Access denied!");
             console.error(error);
@@ -41,6 +45,21 @@ app.post('/login', (req, res) => {
                 access: false,
                 msg: "Credentials incorrect. Access denied!"
             })
+        }
+    })
+})
+
+app.get('/api/getables', (req,res) => {
+    const SQL = "SHOW TABLES";
+    app.locals.globalVariable.query(SQL, (err,result) => {
+        if(err){
+            console.log(err);
+        }else{
+            const tables = result.map((row)=>{
+                row.table_name;
+                
+            })
+            res.status(200).json({tables});
         }
     })
 })

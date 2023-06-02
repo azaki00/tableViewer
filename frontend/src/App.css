@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Raleway:wght@300&display=swap');
 
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   display: flex;
@@ -72,6 +73,7 @@ input:focus{
 }
 
 .btn-wrapper{
+  font-family: 'Orbitron', sans-serif;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -87,9 +89,28 @@ padding: 20px;
   font-family: 'Orbitron', sans-serif;
   background-color: #777374;
   color:black;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
-  
   box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 28px, rgba(0, 0, 0, 0.12) 0px 10px 10px;
+}
+.dashboard-wrapper{
+  width: 100vw;
+}
+
+.dashboard-container{
+  width: 100%;
+  padding: 50px;
+}
+
+.sidebar-wrapper{
+  width: 30vw;
+}
+.sidebar-container{
+  min-height: 50vh;
+  background-color: whitesmoke;
+}
+
+.sidebar-title{
+  font-size: 1.5rem;
 }
